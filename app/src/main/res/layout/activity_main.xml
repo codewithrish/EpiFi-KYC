@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/_16dp"
+    android:padding="@dimen/_32dp"
     tools:context=".presentation.MainActivity">
 
     <ImageView
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:fontFamily="@font/roboto_light"
+        android:fontFamily="@font/roboto"
         android:text="@string/pan_number"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:autofillHints="name"
-        android:background="@drawable/input_background"
+        android:background="@drawable/input_pan_background"
         android:hint="@string/hint_enter_pan_number"
         android:inputType="textCapCharacters"
         android:maxLength="10"
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:fontFamily="@font/roboto_light"
+        android:fontFamily="@font/roboto"
         android:text="@string/birthdate"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/input_background"
-        android:hint="@string/_01"
+        android:hint="@string/hint_date"
         android:importantForAutofill="no"
         android:inputType="number"
         android:maxLength="2"
@@ -93,7 +93,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/input_background"
-        android:hint="@string/_01"
+        android:hint="@string/hint_month"
         android:importantForAutofill="no"
         android:inputType="number"
         android:maxLength="2"
@@ -109,7 +109,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/input_background"
-        android:hint="@string/_1970"
+        android:hint="@string/hint_year"
         android:importantForAutofill="no"
         android:inputType="number"
         android:maxLength="4"
@@ -119,4 +119,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/et_month"
         app:layout_constraintTop_toTopOf="@+id/et_month" />
+
+    <TextView
+        android:id="@+id/tv_no_pan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/no_pan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:padding="12dp"
+        android:text="@string/next"
+        android:enabled="true"
+        app:layout_constraintBottom_toTopOf="@+id/tv_no_pan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_disclaimer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/disclaimer"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toTopOf="@+id/btn_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,9 @@
         <entry key="app/src/main/res/drawable/input_background.xml" value="0.1485" />
         <entry key="app/src/main/res/drawable/input_background_focused.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/input_background_unfocused.xml" value="0.1595" />
+        <entry key="app/src/main/res/drawable/input_pan_background.xml" value="0.1" />
         <entry key="app/src/main/res/font/roboto_black.xml" value="0.3234375" />
+        <entry key="app/src/main/res/font/roboto_light.xml" value="0.165625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.29322916666666665" />
       </map>
     </option>

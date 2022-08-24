@@ -2,11 +2,10 @@ package com.codewithrish.epifi.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.text.InputFilter
-import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.codewithrish.epifi.R
 import com.codewithrish.epifi.common.hideKeyboard
@@ -15,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), TextWatcher, View.OnFocusChangeListener {
+class MainActivity : AppCompatActivity(), View.OnFocusChangeListener {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -44,10 +43,44 @@ class MainActivity : AppCompatActivity(), TextWatcher, View.OnFocusChangeListene
     }
 
     private fun attachTextWatchers() {
-        binding.etPanNumber.addTextChangedListener(this)
-        binding.etDay.addTextChangedListener(this)
-        binding.etMonth.addTextChangedListener(this)
-        binding.etYear.addTextChangedListener(this)
+        binding.etPanNumber.addTextChangedListener {
+            updateInputValues()
+            checkValidity()
+            if (panFocus && panNumber.length == 10) binding.etDay.requestFocus()
+        }
+        binding.etDay.addTextChangedListener {
+            updateInputValues()
+            checkValidity()
+            if (dayFocus && day.length == 2) binding.etMonth.requestFocus()
+            if (dayFocus && day.isEmpty()) binding.etPanNumber.requestFocus()
+        }
+        binding.etMonth.addTextChangedListener {
+            updateInputValues()
+            checkValidity()
+            if (monthFocus && month.length == 2) binding.etYear.requestFocus()
+            if (monthFocus && month.isEmpty()) binding.etDay.requestFocus()
+        }
+        binding.etYear.addTextChangedListener {
+            updateInputValues()
+            checkValidity()
+            if (yearFocus && year.isEmpty()) binding.etMonth.requestFocus()
+        }
+    }
+
+
+    private fun updateInputValues() {
+        panNumber = binding.etPanNumber.text.toString()
+        day = binding.etDay.text.toString()
+        month = binding.etMonth.text.toString()
+        year = binding.etYear.text.toString()
+    }
+
+    //  Validation Method
+    private fun checkValidity() {
+        mainViewModel.validateKycForm(
+            panNumber = panNumber,
+            date = day.plus(month).plus(year)
+        )
     }
 
     private fun attachFocusListeners() {
@@ -59,9 +92,11 @@ class MainActivity : AppCompatActivity(), TextWatcher, View.OnFocusChangeListene
 
     private fun validFormObserver() {
         lifecycleScope.launchWhenCreated {
-            mainViewModel.isValidForm.collectLatest {
-                if (it) {
+            mainViewModel.isValidForm.collectLatest { validForm ->
+                binding.btnNext.isEnabled = validForm
+                if (validForm) {
                     applicationContext.hideKeyboard(binding.root)
+
                 }
             }
         }
@@ -121,41 +156,4 @@ class MainActivity : AppCompatActivity(), TextWatcher, View.OnFocusChangeListene
         this.monthFocus = monthFocus
         this.yearFocus = yearFocus
     }
-
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-        // Get Text Values
-        panNumber = binding.etPanNumber.text.toString()
-        day = binding.etDay.text.toString()
-        month = binding.etMonth.text.toString()
-        year = binding.etYear.text.toString()
-
-        // Calculate Date
-        val date = day.plus(month).plus(year)
-
-        // Change focus entering value4
-        if (panFocus && panNumber.length == 10) binding.etDay.requestFocus()
-        if (dayFocus && day.length == 2) binding.etMonth.requestFocus()
-        if (monthFocus && month.length == 2) binding.etYear.requestFocus()
-
-        // Change focus on deleting value
-//        if (yearFocus && year.isEmpty()) binding.etMonth.requestFocus()
-//        if (monthFocus && month.isEmpty()) binding.etDay.requestFocus()
-//        if (dayFocus && day.isEmpty()) binding.etPanNumber.requestFocus()
-
-        // Call Validation Method
-        mainViewModel.validateKycForm(
-            panNumber = panNumber,
-            date = date
-        )
-    }
-
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        // TODO("Not yet implemented")
-    }
-
-    override fun afterTextChanged(s: Editable?) {
-        // TODO("Not yet implemented")
-    }
-
 }
