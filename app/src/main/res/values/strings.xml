@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">EpiFi</string>
+    <string name="msg_initial_steps">First of the few steps to set you up with a Bank Account</string>
+    <string name="logo">LOGO</string>
+    <string name="hint_enter_pan_number">Enter Pan Number</string>
+    <string name="pan_number">PAN NUMBER</string>
+    <string name="birthdate">BIRTHDATE</string>
+    <string name="_01">01</string>
+    <string name="_1970">1970</string>
+    <string name="zero">0</string>
+</resources>

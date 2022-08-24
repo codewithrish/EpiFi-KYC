@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_16dp"
+    tools:context=".presentation.MainActivity">
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/s"
+        tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/lbl_msg_initial_steps"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/msg_initial_steps"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_logo" />
+
+    <TextView
+        android:id="@+id/lbl_pan_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/roboto_light"
+        android:text="@string/pan_number"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_msg_initial_steps" />
+
+    <EditText
+        android:id="@+id/et_pan_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:autofillHints="name"
+        android:background="@drawable/input_background"
+        android:hint="@string/hint_enter_pan_number"
+        android:inputType="textCapCharacters"
+        android:maxLength="10"
+        android:padding="@dimen/_14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_pan_number"
+        tools:ignore="TextFields" />
+
+    <TextView
+        android:id="@+id/lbl_birthdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/roboto_light"
+        android:text="@string/birthdate"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_pan_number" />
+
+    <EditText
+        android:id="@+id/et_day"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/input_background"
+        android:hint="@string/_01"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:maxLength="2"
+        android:padding="@dimen/_14dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/et_month"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_birthdate" />
+
+    <EditText
+        android:id="@+id/et_month"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/input_background"
+        android:hint="@string/_01"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:maxLength="2"
+        android:padding="@dimen/_14dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/et_year"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/et_day"
+        app:layout_constraintTop_toTopOf="@+id/et_day" />
+
+    <EditText
+        android:id="@+id/et_year"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_background"
+        android:hint="@string/_1970"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:maxLength="4"
+        android:padding="@dimen/_14dp"
+        android:textAlignment="center"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/et_month"
+        app:layout_constraintTop_toTopOf="@+id/et_month" />
+</androidx.constraintlayout.widget.ConstraintLayout>
