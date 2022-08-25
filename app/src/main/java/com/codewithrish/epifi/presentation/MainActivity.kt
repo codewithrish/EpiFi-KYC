@@ -74,12 +74,12 @@ class MainActivity : AppCompatActivity(), View.OnFocusChangeListener {
         binding.etDay.addTextChangedListener {
             updateInputValues()
             checkValidity()
-            if (dayFocus && day.length == 2 && day.toInt() <= 31) binding.etMonth.requestFocus()
+            if (dayFocus && day.length == 2 && day.toInt() <= 31 && day.toInt() > 0) binding.etMonth.requestFocus()
         }
         binding.etMonth.addTextChangedListener {
             updateInputValues()
             checkValidity()
-            if (monthFocus && month.length == 2 && month.toInt() <= 12) binding.etYear.requestFocus()
+            if (monthFocus && month.length == 2 && month.toInt() <= 12 && month.toInt() > 0) binding.etYear.requestFocus()
             if (monthFocus && month.isEmpty()) binding.etDay.requestFocus()
         }
         binding.etYear.addTextChangedListener {
