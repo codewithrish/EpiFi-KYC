@@ -8,7 +8,9 @@ import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.codewithrish.epifi.R
+import com.codewithrish.epifi.common.addOnClickListener
 import com.codewithrish.epifi.common.hideKeyboard
+import com.codewithrish.epifi.common.makeShortToast
 import com.codewithrish.epifi.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -16,15 +18,19 @@ import kotlinx.coroutines.flow.collectLatest
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), View.OnFocusChangeListener {
 
+    // ViewBinding
     private lateinit var binding: ActivityMainBinding
 
+    // View Model
     private val mainViewModel by viewModels<MainViewModel>()
 
+    // Store current Value of panNumber
     private lateinit var panNumber: String
     private lateinit var day: String
     private lateinit var month: String
     private lateinit var year: String
 
+    // To get focused field
     private var panFocus: Boolean = false
     private var dayFocus: Boolean = false
     private var monthFocus: Boolean = false
@@ -35,13 +41,30 @@ class MainActivity : AppCompatActivity(), View.OnFocusChangeListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Force Capital letters in Pan field
+        capitalizePanInput()
+
+        // Text change listeners
         attachTextWatchers()
+        // Focus change listeners
         attachFocusListeners()
 
+        // Validity Observer
         validFormObserver()
-        capitalizePanInput()
+
+        // Finish activity
+        finishThisActivity()
     }
 
+    // Allow only capital letters
+    private fun capitalizePanInput() {
+        binding.etPanNumber.filters = arrayOf(
+            InputFilter.AllCaps(),
+            InputFilter.LengthFilter(10)
+        )
+    }
+
+    // Changing focus based of text change
     private fun attachTextWatchers() {
         binding.etPanNumber.addTextChangedListener {
             updateInputValues()
@@ -51,13 +74,12 @@ class MainActivity : AppCompatActivity(), View.OnFocusChangeListener {
         binding.etDay.addTextChangedListener {
             updateInputValues()
             checkValidity()
-            if (dayFocus && day.length == 2) binding.etMonth.requestFocus()
-            if (dayFocus && day.isEmpty()) binding.etPanNumber.requestFocus()
+            if (dayFocus && day.length == 2 && day.toInt() <= 31) binding.etMonth.requestFocus()
         }
         binding.etMonth.addTextChangedListener {
             updateInputValues()
             checkValidity()
-            if (monthFocus && month.length == 2) binding.etYear.requestFocus()
+            if (monthFocus && month.length == 2 && month.toInt() <= 12) binding.etYear.requestFocus()
             if (monthFocus && month.isEmpty()) binding.etDay.requestFocus()
         }
         binding.etYear.addTextChangedListener {
@@ -67,7 +89,15 @@ class MainActivity : AppCompatActivity(), View.OnFocusChangeListener {
         }
     }
 
+    // Attach focus change listener
+    private fun attachFocusListeners() {
+        binding.etPanNumber.onFocusChangeListener = this
+        binding.etDay.onFocusChangeListener = this
+        binding.etMonth.onFocusChangeListener = this
+        binding.etYear.onFocusChangeListener = this
+    }
 
+    // Update input field values
     private fun updateInputValues() {
         panNumber = binding.etPanNumber.text.toString()
         day = binding.etDay.text.toString()
@@ -83,13 +113,7 @@ class MainActivity : AppCompatActivity(), View.OnFocusChangeListener {
         )
     }
 
-    private fun attachFocusListeners() {
-        binding.etPanNumber.onFocusChangeListener = this
-        binding.etDay.onFocusChangeListener = this
-        binding.etMonth.onFocusChangeListener = this
-        binding.etYear.onFocusChangeListener = this
-    }
-
+    // Form validity observer
     private fun validFormObserver() {
         lifecycleScope.launchWhenCreated {
             mainViewModel.isValidForm.collectLatest { validForm ->
@@ -102,13 +126,7 @@ class MainActivity : AppCompatActivity(), View.OnFocusChangeListener {
         }
     }
 
-    private fun capitalizePanInput() {
-        binding.etPanNumber.filters = arrayOf(
-            InputFilter.AllCaps(),
-            InputFilter.LengthFilter(10)
-        )
-    }
-
+    // Focus listener
     override fun onFocusChange(v: View?, hasFocus: Boolean) {
         when (v?.id) {
             binding.etPanNumber.id -> {
@@ -126,7 +144,7 @@ class MainActivity : AppCompatActivity(), View.OnFocusChangeListener {
                     monthFocus = false,
                     yearFocus = false
                 )
-                if (!hasFocus && binding.etDay.text.length == 1)
+                if (!hasFocus && binding.etDay.text.length == 1 && binding.etDay.text.toString() != getString(R.string.zero))
                     binding.etDay.text.insert(0,getString(R.string.zero))
             }
             binding.etMonth.id -> {
@@ -136,7 +154,7 @@ class MainActivity : AppCompatActivity(), View.OnFocusChangeListener {
                     monthFocus = true,
                     yearFocus = false
                 )
-                if (!hasFocus && binding.etMonth.text.length == 1)
+                if (!hasFocus && binding.etMonth.text.length == 1 && binding.etMonth.text.toString() != getString(R.string.zero))
                     binding.etMonth.text.insert(0,getString(R.string.zero))
             }
             binding.etYear.id -> {
@@ -150,10 +168,20 @@ class MainActivity : AppCompatActivity(), View.OnFocusChangeListener {
         }
     }
 
+    // Update focus variables
     private fun resetFocus(panFocus: Boolean, dayFocus: Boolean, monthFocus: Boolean, yearFocus: Boolean) {
         this.panFocus = panFocus
         this.dayFocus = dayFocus
         this.monthFocus = monthFocus
         this.yearFocus = yearFocus
+    }
+
+    // Finish activity
+    private fun finishThisActivity() {
+        binding.groupFinishActivity.addOnClickListener { view->
+            if (view.id == binding.btnNext.id)
+                makeShortToast(applicationContext, getString(R.string.details_submitted))
+            finish()
+        }
     }
 }

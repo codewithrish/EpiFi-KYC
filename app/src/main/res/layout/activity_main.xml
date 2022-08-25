@@ -1,156 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/_32dp"
+    android:fillViewport="true"
     tools:context=".presentation.MainActivity">
 
-    <ImageView
-        android:id="@+id/img_logo"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/s"
-        tools:ignore="ImageContrastCheck" />
+        android:padding="@dimen/_32dp">
 
-    <TextView
-        android:id="@+id/lbl_msg_initial_steps"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/roboto_black"
-        android:text="@string/msg_initial_steps"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_logo" />
+        <ImageView
+            android:id="@+id/img_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/s"
+            tools:ignore="ImageContrastCheck" />
 
-    <TextView
-        android:id="@+id/lbl_pan_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/pan_number"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_msg_initial_steps" />
+        <TextView
+            android:id="@+id/lbl_msg_initial_steps"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/roboto_black"
+            android:text="@string/msg_initial_steps"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_logo" />
 
-    <EditText
-        android:id="@+id/et_pan_number"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:autofillHints="name"
-        android:background="@drawable/input_pan_background"
-        android:hint="@string/hint_enter_pan_number"
-        android:inputType="textCapCharacters"
-        android:maxLength="10"
-        android:padding="@dimen/_14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_pan_number"
-        tools:ignore="TextFields" />
+        <TextView
+            android:id="@+id/lbl_pan_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/pan_number"
+            android:textColor="?android:textColorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_msg_initial_steps" />
 
-    <TextView
-        android:id="@+id/lbl_birthdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/birthdate"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_pan_number" />
+        <EditText
+            android:id="@+id/et_pan_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints="name"
+            android:background="@drawable/input_pan_background"
+            android:hint="@string/hint_enter_pan_number"
+            android:inputType="textCapCharacters"
+            android:maxLength="10"
+            android:padding="@dimen/_14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_pan_number"
+            tools:ignore="TextFields,TextContrastCheck" />
 
-    <EditText
-        android:id="@+id/et_day"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/input_background"
-        android:hint="@string/hint_date"
-        android:importantForAutofill="no"
-        android:inputType="number"
-        android:maxLength="2"
-        android:padding="@dimen/_14dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toStartOf="@+id/et_month"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_birthdate" />
+        <TextView
+            android:id="@+id/lbl_birthdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/birthdate"
+            android:textColor="?android:textColorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_pan_number" />
 
-    <EditText
-        android:id="@+id/et_month"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/input_background"
-        android:hint="@string/hint_month"
-        android:importantForAutofill="no"
-        android:inputType="number"
-        android:maxLength="2"
-        android:padding="@dimen/_14dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toStartOf="@+id/et_year"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/et_day"
-        app:layout_constraintTop_toTopOf="@+id/et_day" />
+        <EditText
+            android:id="@+id/et_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/input_background"
+            android:hint="@string/hint_date"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:maxLength="2"
+            android:padding="@dimen/_14dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/et_month"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_birthdate"
+            tools:ignore="TextContrastCheck" />
 
-    <EditText
-        android:id="@+id/et_year"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/input_background"
-        android:hint="@string/hint_year"
-        android:importantForAutofill="no"
-        android:inputType="number"
-        android:maxLength="4"
-        android:padding="@dimen/_14dp"
-        android:textAlignment="center"
-        app:layout_constraintHorizontal_weight="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/et_month"
-        app:layout_constraintTop_toTopOf="@+id/et_month" />
+        <EditText
+            android:id="@+id/et_month"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/input_background"
+            android:hint="@string/hint_month"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:maxLength="2"
+            android:padding="@dimen/_14dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/et_year"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/et_day"
+            app:layout_constraintTop_toTopOf="@+id/et_day"
+            tools:ignore="TextContrastCheck" />
 
-    <TextView
-        android:id="@+id/tv_no_pan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/no_pan"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <EditText
+            android:id="@+id/et_year"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_background"
+            android:hint="@string/hint_year"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:maxLength="4"
+            android:padding="@dimen/_14dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toEndOf="@+id/et_month"
+            app:layout_constraintTop_toTopOf="@+id/et_month"
+            tools:ignore="TextContrastCheck" />
 
-    <Button
-        android:id="@+id/btn_next"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:padding="12dp"
-        android:text="@string/next"
-        android:enabled="true"
-        app:layout_constraintBottom_toTopOf="@+id/tv_no_pan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/tv_no_pan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_pan"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_disclaimer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/disclaimer"
-        android:textAlignment="textStart"
-        app:layout_constraintBottom_toTopOf="@+id/btn_next"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:enabled="false"
+            android:padding="12dp"
+            android:text="@string/next"
+            app:layout_constraintBottom_toTopOf="@+id/tv_no_pan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_disclaimer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/disclaimer"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toTopOf="@+id/btn_next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_finish_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tv_no_pan,btn_next" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

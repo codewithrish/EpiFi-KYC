@@ -12,6 +12,7 @@ import javax.inject.Singleton
 @Module
 object AppModule {
 
+    // Create singleton(Only one instance in defined scope) instance of form validation repository
     @Provides
     @Singleton
     fun providesValidationRepository(): FormValidationRepository {

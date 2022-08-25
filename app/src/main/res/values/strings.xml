@@ -18,4 +18,5 @@
     <string name="no_pan">I don\'t have a PAN</string>
     <string name="next">Next</string>
     <string name="disclaimer">Providing PAN &amp; Date of Birth helps s find and fetch your KYC from a central registry by the Government of India.  <font color="#6142b0">Learn more</font></string>
+    <string name="details_submitted">Details Submitted Successfully</string>
 </resources>
